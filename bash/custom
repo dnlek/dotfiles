@@ -1,0 +1,15 @@
+export WORKSPACE=${HOME}/Workspace
+
+# setup goland env
+export GOPATH=${WORKSPACE}/golang
+export PATH=$PATH:$GOPATH/bin
+
+# export android tools paths
+export PATH=${PATH}:${HOME}/adt-bundle-linux-x86_64/sdk/platform-tools:${HOME}/adt-bundle-linux-x86_64/sdk/tools
+
+# SSL_CERT_FILE for ruby ssl problems
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+# initialize virtualenvwrapper
+export WORKON_HOME=~/.venvs
+source /usr/local/bin/virtualenvwrapper.sh
