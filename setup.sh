@@ -20,6 +20,9 @@ echo "ln ${HOME}/{.gitconfig,.gitignore}"
 ln -f -s ${CUR_DIR}/gitconfig ${HOME}/.gitconfig
 ln -f -s ${CUR_DIR}/gitignore ${HOME}/.gitignore
 
+echo "ln ${HOME}/.bashrc,.bash_config"
+ln -f -s ${CUR_DIR}/bashrc ${HOME}/.bashrc
+ln -f -s ${CUR_DIR}/bash ${HOME}/.bash
 
 # install fonts
 echo "install fonts in ${HOME}/.fonts"
