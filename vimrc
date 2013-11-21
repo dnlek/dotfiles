@@ -2,6 +2,7 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+let mapleader = ","
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
@@ -49,13 +50,20 @@ NeoBundleLazy 'Shougo/vimshell.vim', {'autoload':{'commands':[ 'VimShell', 'VimS
 "}}}
 
 " files tree
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree' " {{{
+	let NERDTreeIgnore = ['\.pyc$']
+	nnoremap \ :NERDTreeToggle<CR>
+	nnoremap <leader>\ :NERDTreeFind<CR>
+"}}}
 
 " bufer, files etc search
 NeoBundle 'Shougo/unite.vim' " {{{
 	" files searching like ctrlp
 	" -auto-preview (automatic preview)
-	nnoremap <C-p> :Unite -start-insert -default-action=vsplit file_rec/async<CR>
+	" nnoremap <C-p> :Unite -start-insert -default-action=vsplit file_rec/async:!<CR>
+	nnoremap <leader>fv :Unite -buffer-name=files -default-action=vsplit -start-insert file_rec/async:!<cr>
+	nnoremap <leader>fs :Unite -buffer-name=files -default-action=split -start-insert file_rec/async:!<cr>
+
 
 	" content searching like ack.vim
 	nnoremap <space>/ :Unite grep:.<cr>
@@ -99,12 +107,15 @@ NeoBundle 'bling/vim-airline'
 " will not use this until it has some more relevant support eg. javascript or
 " whatevet
 " completition package
-" NeoBundle 'Valloric/YouCompleteMe', {'build':{'unix': './install.sh'},'vim_version':'7.3.584'} "{{{
+NeoBundle 'Valloric/YouCompleteMe', {'build':{'unix': './install.sh'},'vim_version':'7.3.584'} "{{{
+	nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 	let g:ycm_complete_in_comments_and_strings=1
 " 	let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 " 	let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 " 	let g:ycm_filetype_blacklist={'unite': 1}
 "}}}
+
+NeoBundle 'SirVer/ultisnips'
 
 " delimiteres and indents
 NeoBundle 'Raimondi/delimitMate'
@@ -116,11 +127,16 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-fugitive'
 
 " python helper
-NeoBundleLazy 'klen/python-mode', {'autoload':{'filetypes':['python']}} "{{{
-	let g:pymode_rope=0
+" NeoBundleLazy 'klen/python-mode', {'autoload':{'filetypes':['python']}} "{{{
+" 	let g:pymode_rope = 0  " use ycm insteed rope
+" 	let g:pymode_virtualenv = 1 " autoload venv 
+" 	let g:pymode_lint = 0 " disable lint - use syntastic insteed
+" 	let g:pymode_run = 0 " disable python run code - vagrant used
+" 	let g:pymode_syntax = 1 " enable syntax highlight
 "}}}
 NeoBundleLazy 'davidhalter/jedi-vim', {'autoload':{'filetypes':['python']}} "{{{
 	let g:jedi#popup_on_dot=0
+	let g:jedi#completions_enabled = 0
 "}}}
 
 " multiple cursors
@@ -129,6 +145,13 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " syntax checks
 NeoBundle 'scrooloose/syntastic' "{{{
 	let g:syntastic_python_checkers = ['flake8']
+  " let g:syntastic_check_on_wq = 0
+	let g:syntastic_enable_highlighting=0
+  let g:syntastic_echo_current_error = 1
+  let g:syntastic_auto_loc_list = 0 " do not open errors window
+	let g:syntastic_error_symbol='✗'
+	let g:syntastic_warning_symbol='⚠'
+	" let g:syntastic_python_flake8_args='--ignore=E123,E124,E126,E128,E231,E261,E401,E501'
 	" let g:syntastic_check_on_open=1
 "}}}
 
@@ -201,6 +224,9 @@ set number
 set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
+set softtabstop=2
+" tab columns in visual mode moves
+set shiftwidth=2
 " Show “invisible” characters
 map <F6> :set invlist<cr>
 set lcs=tab:→\ ,trail:·,eol:↵,nbsp:_,extends:↷,precedes:↶
@@ -238,6 +264,8 @@ set autoread
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
+
+set smartindent
 
 set tags+=.tags
 set nowrap
@@ -335,7 +363,7 @@ au VimResized * exe "normal! \<c-w>="
 
 " ============== Filetype specific ================
 autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.tpl setlocal ft=html
-autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,xhtml,xml,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 
 " ============== Functions ========================
@@ -351,8 +379,8 @@ nnoremap <silent> <leader>r :call RelativeNumberToggle()<CR>
 
 
 " autocmd {{{
-  autocmd FileType css,scss setlocal foldmethod=marker foldmarker={,}
-  autocmd FileType css,scss nnoremap <silent> <leader>S vi{:sort<CR>
+  autocmd FileType css,scss,less setlocal foldmethod=marker foldmarker={,}
+  autocmd FileType css,scss,less nnoremap <silent> <leader>S vi{:sort<CR>
   autocmd FileType python setlocal foldmethod=indent
   autocmd FileType markdown setlocal nolist
   autocmd FileType vim setlocal fdm=indent keywordprg=:help
