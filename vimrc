@@ -79,12 +79,12 @@ NeoBundle 'Shougo/unite.vim' " {{{
 	" let g:unite_source_grep_command='ag'
 	" let g:unite_source_grep_default_opts='--nocolor --nogroup --hidden'
 	" let g:unite_source_grep_recursive_opt=''
-	" let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 
 	if executable('ag')
 		let g:unite_source_grep_command='ag'
 		let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
 		let g:unite_source_grep_recursive_opt=''
+  	let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 	elseif executable('ack')
 		let g:unite_source_grep_command='ack'
 		let g:unite_source_grep_default_opts='--no-heading --no-color -a -C4'
@@ -127,12 +127,12 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-fugitive'
 
 " python helper
-" NeoBundleLazy 'klen/python-mode', {'autoload':{'filetypes':['python']}} "{{{
-" 	let g:pymode_rope = 0  " use ycm insteed rope
-" 	let g:pymode_virtualenv = 1 " autoload venv 
-" 	let g:pymode_lint = 0 " disable lint - use syntastic insteed
-" 	let g:pymode_run = 0 " disable python run code - vagrant used
-" 	let g:pymode_syntax = 1 " enable syntax highlight
+NeoBundleLazy 'klen/python-mode', {'autoload':{'filetypes':['python']}} "{{{
+	let g:pymode_rope = 0  " use ycm insteed rope
+	let g:pymode_virtualenv = 1 " autoload venv 
+	let g:pymode_lint = 0 " disable lint - use syntastic insteed
+	let g:pymode_run = 0 " disable python run code - vagrant used
+	let g:pymode_syntax = 1 " enable syntax highlight
 "}}}
 NeoBundleLazy 'davidhalter/jedi-vim', {'autoload':{'filetypes':['python']}} "{{{
 	let g:jedi#popup_on_dot=0
@@ -225,6 +225,7 @@ set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
 set softtabstop=2
+set expandtab
 " tab columns in visual mode moves
 set shiftwidth=2
 " Show “invisible” characters
