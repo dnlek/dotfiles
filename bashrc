@@ -103,6 +103,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Custom bash config
-if [ -f ~/bash/custom ]; then
-    . ~/bash/custom
+if [ -f ~/.bash/custom ]; then
+    . ~/.bash/custom
 fi
