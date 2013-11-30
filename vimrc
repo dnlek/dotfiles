@@ -65,6 +65,7 @@ NeoBundle 'Shougo/unite.vim' " {{{
 	" files searching like ctrlp
 	" -auto-preview (automatic preview)
 	" nnoremap <C-p> :Unite -start-insert -default-action=vsplit file_rec/async:!<CR>
+	nnoremap <leader>f :Unite -buffer-name=files -start-insert file_rec/async:!<cr>
 	nnoremap <leader>fv :Unite -buffer-name=files -default-action=vsplit -start-insert file_rec/async:!<cr>
 	nnoremap <leader>fs :Unite -buffer-name=files -default-action=split -start-insert file_rec/async:!<cr>
 
