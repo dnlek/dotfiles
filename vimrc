@@ -4,6 +4,8 @@ if has('vim_starting')
 endif
 let mapleader = ","
 
+set encoding=utf-8
+
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Folding {{{                                                                 
@@ -329,10 +331,6 @@ augroup END
 
 " ============== Airline Config ===================
 let g:airline_powerline_fonts = 1
-set encoding=utf-8
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
 
 " ============== Venv =============================
 " Add the virtualenv's site-packages to vim path
