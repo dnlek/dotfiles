@@ -343,6 +343,10 @@ set wildignore+=log/**,tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=.egg-info/,eggs/,*.pyc,.git
 
+" ================ Session options ==================
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
+
 " ui configuration {{{
   set showmatch                                       "automatically highlight matching braces/brackets/etc.
   set matchtime=2                                     "tens of a second to show matching parentheses
