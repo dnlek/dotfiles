@@ -150,6 +150,7 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " syntax checks
 NeoBundle 'scrooloose/syntastic' "{{{
 	let g:syntastic_python_checkers = ['flake8']
+  let g:syntastic_python_checker_args = "--max-complexity=10 --max-line-length=120"
   " let g:syntastic_check_on_wq = 0
 	let g:syntastic_enable_highlighting=0
   let g:syntastic_echo_current_error = 1
@@ -355,13 +356,15 @@ endif
 cmap W! w !sudo tee % >/dev/null
 " Paste from clipboard
 map <leader>p "+p
-" draw 80 chars limit line
-if (v:version >=703)
-    set colorcolumn=80
-    hi ColorColumn ctermbg=black
-endif
 " automatic splits resize on window resize
 au VimResized * exe "normal! \<c-w>="
+
+" draw 120 chars limit line
+if (v:version >=703)
+    set colorcolumn=120
+    hi ColorColumn ctermbg=black
+endif
+
 
 " ============== Filetype specific ================
 autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.tpl setlocal ft=html
