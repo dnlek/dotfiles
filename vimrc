@@ -216,7 +216,48 @@ NeoBundleLazy 'mattn/emmet-vim', {'autoload':{'filetypes':['html','xml','xsl','x
 NeoBundleLazy 'jnwhiteh/vim-golang', {'autoload':{'filetypes':['go']}}
 NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
 
+" themes
+  " dark theme
+  set background=dark
+
+  set t_Co=256
+
+  " NeoBundle "altercation/vim-colors-solarized" " {{{
+  " colorscheme solarized
+  " let g:solarized_termcolors=256
+  " let g:solarized_termtrans=1
+
+  NeoBundle "flazz/vim-colorschemes"
+  " colorscheme molokai
+  " colorscheme jellybeans
+  " colorscheme jellyx
+  " colorscheme wombat256
+  " colorscheme zenburn
+  " colorscheme desertEx
+  " colorscheme desert
+  colorscheme ir_black
+
+  " NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+  " colorscheme Tomorrow
+  " colorscheme Tomorrow-Night
+
+  " transparent background 
+  " hi Normal ctermbg=none
+ 
+  NeoBundle "chriskempson/base16-vim"
+
+  " colorscheme base16-default
+  " colorscheme base16-chalk
+  " let base16colorspace=256  " Access colors present in 256 colorspace
+
+  " NeoBundle "Pychimp/vim-luna"
+  " colorscheme luna
+
+"}}}
+
+
 filetype plugin indent on
+syntax on
 
 NeoBundleCheck
 
