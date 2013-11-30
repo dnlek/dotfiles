@@ -22,7 +22,8 @@ ln -f -s ${CUR_DIR}/gitignore ${HOME}/.gitignore
 
 echo "ln ${HOME}/.bashrc,.bash_config"
 ln -f -s ${CUR_DIR}/bashrc ${HOME}/.bashrc
-ln -f -s ${CUR_DIR}/bash ${HOME}/.bash
+rm ${HOME}/.bash
+ln -f -s ${CUR_DIR}/bash/ ${HOME}/.bash
 
 echo "ln ${HOME}/.config/flake8"
 ln -f -s ${CUR_DIR}/config/flake8 ${HOME}/.config/flake8
