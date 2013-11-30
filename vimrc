@@ -280,14 +280,6 @@ set shiftwidth=2
 " Show “invisible” characters
 map <F6> :set invlist<cr>
 set lcs=tab:→\ ,trail:·,eol:↵,nbsp:_,extends:↷,precedes:↶
-" Highlight searchesi
-set hlsearch
-" Incrementally search while typing a /regex
-set incsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
 " Always show status line
 set laststatus=2
 " Enable mouse in all modes
@@ -316,7 +308,6 @@ set autoread
 set hidden
 
 set smartindent
-
 set tags+=.tags
 set nowrap
 
@@ -325,6 +316,8 @@ set nowrap
 set incsearch        "Find the next match as we type the search
 set hlsearch         "Hilight searches by default
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
+set ignorecase
+set smartcase
 
 " ================ Turn Off Swap Files ==============
 
