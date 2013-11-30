@@ -265,10 +265,12 @@ NeoBundleCheck
 " ================== Configuration ===================
 
 " ========= General Config ===========
+
+
 " Enable line numbers
 set number
 " Highlight current line
-set cursorline
+" set cursorline
 " Make tabs as wide as two spaces
 set tabstop=2
 set softtabstop=2
