@@ -311,6 +311,13 @@ set smartindent
 set tags+=.tags
 set nowrap
 
+" ================ Windows ========================= 
+set equalalways " Multiple windows, when created, are equal in size
+set splitbelow splitright
+
+:noremap <Leader>v :vsp^M^W^W<cr>
+:noremap <Leader>h :split^M^W^W<cr>
+
 " ================ Search Settings  =================
 
 set incsearch        "Find the next match as we type the search
