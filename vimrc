@@ -56,6 +56,8 @@ NeoBundle 'scrooloose/nerdtree' " {{{
 	let NERDTreeIgnore = ['\.pyc$']
 	nnoremap \ :NERDTreeToggle<CR>
 	nnoremap <leader>\ :NERDTreeFind<CR>
+  let NERDTreeMouseMode=1 " Single click for everything
+  let g:NERDTreeWinPos = "right"
 "}}}
 
 " bufer, files etc search
