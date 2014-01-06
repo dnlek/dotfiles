@@ -4,13 +4,108 @@ if has('vim_starting')
 endif
 let mapleader = ","
 
-set encoding=utf-8
+" ================== Configuration ===================
+
+" ========= General Config ===========
+  " Enable line numbers
+  set number
+  " 
+  set encoding=utf-8
+  " Make tabs as wide as two spaces
+  set tabstop=2
+  set softtabstop=2
+  set expandtab
+  " tab columns in visual mode moves
+  set shiftwidth=2
+  " Show “invisible” characters
+  map <F6> :set invlist<cr>
+  set lcs=tab:→\ ,trail:·,eol:↵,nbsp:_,extends:↷,precedes:↶
+  " Always show status line
+  set laststatus=2
+  " Enable mouse in all modes
+  set mouse=a
+  " Disable error bells
+  set noerrorbells
+  " Don’t reset cursor to start of line when moving around.
+  set nostartofline
+  " Show the cursor position
+  set ruler
+  " Don’t show the intro message when starting vim
+  set shortmess=atI
+  " Show the current mode
+  set showmode
+  " Show the filename in the window titlebar
+  set title
+  "Allow backspace in insert mode
+  set backspace=indent,eol,start
+  "Store lots of :cmdline history
+  set history=1000
+  "Reload files changed outside vim
+  set autoread
+  " This makes vim act like all other editors, buffers can
+  " exist in the background without being in a window.
+  " http://items.sjbach.com/319/configuring-vim-right
+  set hidden
+
+  set smartindent
+  set tags+=.tags
+  set nowrap
+
+" ================ Windows ========================= 
+  set equalalways " Multiple windows, when created, are equal in size
+  set splitbelow splitright
+
+
+:noremap <Leader>v :vsp^M^W^W<cr>
+:noremap <Leader>h :split^M^W^W<cr>
+
+" ================ Search Settings  =================
+  set incsearch        "Find the next match as we type the search
+  set hlsearch         "Hilight searches by default
+  set viminfo='100,f1  "Save up to 100 marks, enable capital marks
+  set ignorecase
+  set smartcase
+
+" ================ Turn Off Swap Files ==============
+  set noswapfile
+  set nobackup
+  set nowb
+
+" ================ Completion =======================
+  set wildmode=longest:full
+  set wildmenu
+  set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+  set wildignore+=*vim/backups*
+  set wildignore+=vendor/cache/**
+  set wildignore+=log/**,tmp/**
+  set wildignore+=*.png,*.jpg,*.gif
+  set wildignore+=.egg-info/,eggs/,*.pyc,.git
+
+" ================ Session options ==================
+  set ssop-=options    " do not store global and local values in a session
+  set ssop-=folds      " do not store folds
+
+" ui configuration {{{
+  set showmatch                                       "automatically highlight matching braces/brackets/etc.
+  set matchtime=2                                     "tens of a second to show matching parentheses
+  set lazyredraw
+  set laststatus=2
+  set noshowmode
+  let g:xml_syntax_folding=1                          "enable xml folding
+" }}}
+
+" ================ Scrolling ========================
+  set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+  set sidescrolloff=15
+  set sidescroll=1
+
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-" Folding {{{                                                                 
+" Folding {{{
+  set foldenable
 	set foldmethod=marker
-
+  set foldnestmax=1
 	" Toggle folding
 
 	nnoremap <F7> za
@@ -103,6 +198,13 @@ NeoBundle 'Shougo/unite.vim' " {{{
 
 " nice looking status line
 NeoBundle 'bling/vim-airline'
+  " ============== Airline Config ===================
+  let g:airline_powerline_fonts = 1
+
+NeoBundle 'paranoida/vim-airlineish.git' " {{{
+  " konfiguracja airline
+  let g:airline_theme = 'airlineish'
+"}}}
 
 " exuberant tags show
     NeoBundleLazy 'majutsushi/tagbar', {'autoload':{'commands':'TagbarToggle'}} "{{{
@@ -114,10 +216,10 @@ NeoBundle 'bling/vim-airline'
 " completition package
 NeoBundle 'Valloric/YouCompleteMe', {'build':{'unix': './install.sh'},'vim_version':'7.3.584'} "{{{
 	nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" 	let g:ycm_complete_in_comments_and_strings=1
-" 	let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-" 	let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-" 	let g:ycm_filetype_blacklist={'unite': 1}
+  " 	let g:ycm_complete_in_comments_and_strings=1
+  " 	let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+  " 	let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+  " 	let g:ycm_filetype_blacklist={'unite': 1}
 "}}}
 
 NeoBundle 'SirVer/ultisnips'
@@ -130,6 +232,9 @@ NeoBundle 'tomtom/tcomment_vim'
 
 " git utility
 NeoBundle 'tpope/vim-fugitive'
+
+" how much (calc utility plugin)
+NeoBundle 'sk1418/HowMuch'
 
 " python helper
 NeoBundleLazy 'klen/python-mode', {'autoload':{'filetypes':['python']}} "{{{
@@ -194,10 +299,12 @@ NeoBundleLazy 'marijnh/tern_for_vim', {
 		\ 'windows': 'npm install',
 	\ },
 \ }
+
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}} "{{{
-	nnoremap <leader>fjs :call JsBeautify()<cr>
+  nnoremap <leader>fjs :call JsBeautify()<cr>
 "}}}
+"
 NeoBundleLazy 'leafgarland/typescript-vim', {'autoload':{'filetypes':['typescript']}}
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
 NeoBundleLazy 'mmalecki/vim-node.js', {'autoload':{'filetypes':['javascript']}}
@@ -227,7 +334,7 @@ NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
   " let g:solarized_termcolors=256
   " let g:solarized_termtrans=1
 
-  NeoBundle "flazz/vim-colorschemes"
+  " NeoBundle "flazz/vim-colorschemes"
   " colorscheme molokai
   " colorscheme jellybeans
   " colorscheme jellyx
@@ -235,26 +342,40 @@ NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
   " colorscheme zenburn
   " colorscheme desertEx
   " colorscheme desert
-  colorscheme ir_black
+  " colorscheme ir_black
 
   " NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
   " colorscheme Tomorrow
   " colorscheme Tomorrow-Night
 
-  " transparent background 
-  " hi Normal ctermbg=none
  
-  NeoBundle "chriskempson/base16-vim"
-
-  " colorscheme base16-default
+  " NeoBundle "chriskempson/base16-vim"" colorscheme base16-default
   " colorscheme base16-chalk
   " let base16colorspace=256  " Access colors present in 256 colorspace
 
   " NeoBundle "Pychimp/vim-luna"
   " colorscheme luna
+  
+  " NeoBundle "daylerees/colour-schemes", {'rtp': 'vim-themes/'}
+  " colorscheme Darkside
+  
+  NeoBundle "dnlek/vim-StarkEx"
+  colorscheme StarkEx
+  " colorscheme Laravel
+  " transparent background 
 
+  " NeoBundle "shawncplus/skittles_berry" 
+  " colorscheme skittles_berry 
+
+  "
+  " hi Normal ctermbg=none
 "}}}
 
+NeoBundle 'bilalq/lite-dfm' 
+  " {{{
+  " disable all vim bloat
+  nnoremap <Leader>z :LiteDFMToggle<CR>i<Esc>`^
+"}}}
 
 filetype plugin indent on
 syntax on
@@ -262,126 +383,19 @@ syntax on
 NeoBundleCheck
 
 
-" ================== Configuration ===================
-
-" ========= General Config ===========
-
-
-" Enable line numbers
-set number
-" Highlight current line
-" set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
-set softtabstop=2
-set expandtab
-" tab columns in visual mode moves
-set shiftwidth=2
-" Show “invisible” characters
-map <F6> :set invlist<cr>
-set lcs=tab:→\ ,trail:·,eol:↵,nbsp:_,extends:↷,precedes:↶
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-"Allow backspace in insert mode
-set backspace=indent,eol,start
-"Store lots of :cmdline history
-set history=1000
-"Reload files changed outside vim
-set autoread
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
-set smartindent
-set tags+=.tags
-set nowrap
-
-" ================ Windows ========================= 
-set equalalways " Multiple windows, when created, are equal in size
-set splitbelow splitright
-
-:noremap <Leader>v :vsp^M^W^W<cr>
-:noremap <Leader>h :split^M^W^W<cr>
-
-" ================ Search Settings  =================
-
-set incsearch        "Find the next match as we type the search
-set hlsearch         "Hilight searches by default
-set viminfo='100,f1  "Save up to 100 marks, enable capital marks
-set ignorecase
-set smartcase
-
-" ================ Turn Off Swap Files ==============
-
-set noswapfile
-set nobackup
-set nowb
-
-" ================ Completion =======================
-
-set wildmode=longest:full
-set wildmenu
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=vendor/cache/**
-set wildignore+=log/**,tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=.egg-info/,eggs/,*.pyc,.git
-
-" ================ Session options ==================
-set ssop-=options    " do not store global and local values in a session
-set ssop-=folds      " do not store folds
-
-" ui configuration {{{
-  set showmatch                                       "automatically highlight matching braces/brackets/etc.
-  set matchtime=2                                     "tens of a second to show matching parentheses
-  set number
-  set lazyredraw
-  set laststatus=2
-  set noshowmode
-  set foldenable                                      "enable folds by default
-  set foldmethod=syntax                               "fold via syntax of files
-  set foldlevelstart=99                               "open all folds by default
-  let g:xml_syntax_folding=1                          "enable xml folding
-" }}}
-
-" ================ Scrolling ========================
-
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
 " ============== Restore last position ============
-function! ResCur()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
+  function! ResCur()
+    if line("'\"") <= line("$")
+      normal! g`"
+      return 1
+    endif
+  endfunction
+  augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+  augroup END
 
-augroup resCur
-  autocmd!
-  autocmd BufWinEnter * call ResCur()
-augroup END
 
-
-" ============== Airline Config ===================
-let g:airline_powerline_fonts = 1
 
 " ============== Venv =============================
 " Add the virtualenv's site-packages to vim path
@@ -399,18 +413,18 @@ EOF
 endif
 
 " ============== Other ============================
-" sudo write this
-cmap W! w !sudo tee % >/dev/null
-" Paste from clipboard
-map <leader>p "+p
-" automatic splits resize on window resize
-au VimResized * exe "normal! \<c-w>="
+  " sudo write this
+  cmap W! w !sudo tee % >/dev/null
+  " Paste from clipboard
+  map <leader>p "+p
+  " automatic splits resize on window resize
+  au VimResized * exe "normal! \<c-w>="
 
-" draw 120 chars limit line
-if (v:version >=703)
-    set colorcolumn=120
-    hi ColorColumn ctermbg=black
-endif
+  " draw 120 chars limit line
+  if (v:version >=703)
+      set colorcolumn=120
+      hi ColorColumn ctermbg=black
+  endif
 
 
 " ============== Filetype specific ================
@@ -429,11 +443,23 @@ endfunc
 
 nnoremap <silent> <leader>r :call RelativeNumberToggle()<CR>
 
+" keyboard move block shorcuts {{{
+  " ALT + Up/down in input/visual mode will move line up/down 
+  nnoremap <A-down> :m .+1<CR>
+  nnoremap <A-up> :m .-2<CR>
+  inoremap <A-down> <Esc>:m .+1<CR>gi
+  inoremap <A-up> <Esc>:m .-2<CR>gi
+  vnoremap <A-down> :m '>+1<CR>gvgv
+  vnoremap <A-up> :m '<-2<CR>gvgv
+"}}}
+
+" replace selected text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " autocmd {{{
-  autocmd FileType css,scss,less setlocal foldmethod=marker foldmarker={,}
+  autocmd FileType css,scss,less setlocal foldmethod=marker foldmarker={,} foldnestmax=1
   autocmd FileType css,scss,less nnoremap <silent> <leader>S vi{:sort<CR>
-  autocmd FileType python setlocal foldmethod=indent
+  autocmd FileType python setlocal foldmethod=marker
   autocmd FileType markdown setlocal nolist
   autocmd FileType vim setlocal fdm=indent keywordprg=:help
 "}}}
