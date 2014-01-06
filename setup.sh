@@ -31,3 +31,8 @@ ln -f -s ${CUR_DIR}/config/flake8 ${HOME}/.config/flake8
 # install fonts
 echo "install fonts in ${HOME}/.fonts"
 cp fonts/* ${HOME}/.fonts/
+
+# install zsh
+echo "install zshrc in ${HOME}/.zshrc"
+ln -f -s ${CUR_DIR}/zshrc ${HOME}/.zshrc
+
